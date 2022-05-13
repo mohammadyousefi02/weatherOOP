@@ -1,0 +1,84 @@
+:root {
+    --primary: #43AEFC;
+}
+
+* {
+    font-family: 'Roboto', sans-serif !important;
+    font-weight: 700;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background-color: #43AEFC;
+}
+
+.background-primary {
+    background-color: var(--primary);
+}
+
+.primary-color {
+    color: var(--primary);
+}
+
+#or::after {
+    content: "";
+    display: block;
+    border: 1px solid #EDEDED;
+    width: 50%;
+}
+
+#or {
+    color: #CBCBCB;
+}
+
+#or::before {
+    content: "";
+    display: block;
+    border: 1px solid #EDEDED;
+    width: 50%;
+}
+
+input {
+    border: 1px solid #CBCBCB;
+    outline: none;
+}
+
+input::placeholder {
+    color: #CBCBCB;
+    text-align: center;
+}
+
+.gap-6 {
+    gap: 4.2rem
+}
+
+#temp::after,
+#feels-like::after {
+    content: "\00b0 C";
+}
+
+#humidity::after {
+    content: "%"
+}
+
+.get-data-form {
+    width: 350px;
+}
+
+.weather-modal {
+    background-color: rgba(0, 0, 0, .3);
+    z-index: 99;
+}
+
+.modal-section {
+    width: 350px;
+}
+
+.bi-arrow-left {
+    cursor: pointer;
+}
