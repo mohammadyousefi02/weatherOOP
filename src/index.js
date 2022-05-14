@@ -15,15 +15,18 @@ const errorText = document.querySelector(".error-text-modal")
 
 const API_KEY = "4358f57aac0c35ac0b0d8d61508ebfcd"
 
+//return an api with city and key search parameters
 const API_By_CITY = (city, key) => {
     const edited = city.split(" ").join("+")
     return `https://api.openweathermap.org/data/2.5/weather?q=${edited}&appid=${key}&units=metric`
 }
 
+//return an api with lat, long and key search parameters
 const API_BY_LOCATION = (lat, lon, key) => `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&units=metric`
 
 class Weather {
     constructor(modal, modalSection, spinner, errorText, weatherImgElem, tempElem, weatherDescElem, nameCityElem, feelsLikeElem, humidityElem) {
+        //get necessary elements
         this.modal = modal;
         this.modalSection = modalSection;
         this.spinner = spinner;
@@ -35,6 +38,7 @@ class Weather {
         this.feelsLikeElem = feelsLikeElem
         this.humidityElem = humidityElem
     }
+    //request to api and get data
     getCityWeather = async (api) => {
         try {
             this.spinner.classList.remove("d-none")
@@ -49,6 +53,7 @@ class Weather {
             errorText.classList.remove("d-none")
         }
     }
+    //these are bunch of functions for set property of each specific data till...
     setCityName = (obj) => {
         this.city = obj.name
     }
@@ -70,6 +75,7 @@ class Weather {
         else this.isDay = true;
     }
     setWeatherImg = () => {
+        //check weather and if it is day set the image of day and if it is is night set the image of night
         if (this.weather == "Clouds") {
             if (this.isDay) this.weatherImg = "icons8-partly-cloudy-day-96.png"
             else this.weatherImg = "icons8-night-96.png"
@@ -79,6 +85,7 @@ class Weather {
             else this.weatherImg = "icons8-crescent-moon-100.png"
         }
     }
+    //here
     allFunctions = (obj) => {
         this.setCityName(obj)
         this.setTemp(obj)
@@ -98,6 +105,7 @@ class Weather {
             }
         })
     }
+    //access user location
     getLocation = () => {
         if (navigator.geolocation) {
             this.spinner.classList.remove("d-none")
@@ -108,10 +116,12 @@ class Weather {
             errorText.classList.remove("d-none")
         }
     }
+    //if user allow us do this
     locationRes = (position) => {
         console.log(API_BY_LOCATION(position.coords.latitude, position.coords.longitude, API_KEY))
         this.getCityWeather(API_BY_LOCATION(position.coords.latitude, position.coords.longitude, API_KEY))
     }
+    //if user dont allow us do this
     locationReg = () => {
         this.spinner.classList.add("d-none")
         errorText.innerText = "sorry we can't find anything,please try again"
